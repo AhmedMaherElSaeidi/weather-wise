@@ -6,7 +6,9 @@ const GlobalContext = createContext();
 export const globalContext = () => useContext(GlobalContext);
 
 const Layout = () => {
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(
+    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+  );
   const [location, setLocation] = useState("giza");
   const themeToggeler = () => {
     const nextTheme = theme === "light" ? "dark" : "light";
