@@ -1,0 +1,15 @@
+.weather-offline {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+.weather-offline svg {
+  font-size: 6rem;
+}
+.weather-offline p {
+  font-style: italic;
+  font-weight: bold;
+}

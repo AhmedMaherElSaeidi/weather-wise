@@ -1,0 +1,27 @@
+#dark .day-weather-box {
+  border: 1px solid #2f3c44;
+  background-color: #36454f;
+}
+.day-weather-box {
+  border: 1px solid #28688c;
+  background-color: #2e7fa1;
+  border-radius: 5px;
+  height: 5em;
+}
+.day-weather-box p {
+  margin-bottom: 0;
+}
+.day-weather-box .day-weather-inner-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 14px auto;
+  padding: 0px 5px;
+}
+.day-weather-box .forecast-temp {
+  font-size: 1.25rem;
+  text-wrap: nowrap;
+}
+.day-weather-box .forecast-main {
+  padding: 0px 0px 0px 30px;
+}

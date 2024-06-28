@@ -1,0 +1,53 @@
+#light nav {
+  color: white !important;
+  background-color: #28688c !important;
+}
+#dark nav {
+  color: white !important;
+  background-color: #222831 !important;
+}
+nav .navbar-toggler,
+nav .navbar-toggler:focus,
+nav .navbar-toggler:focus-visible {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+nav .navbar-toggler:hover {
+  cursor: pointer;
+}
+nav .navbar-nav {
+  width: 100%;
+  justify-content: space-between;
+}
+nav .navbar-brand {
+  font-weight: bold;
+  font-style: italic;
+  color: white !important;
+}
+nav .navbar-brand > img {
+  width: 2rem;
+  height: 2rem;
+}
+#light nav .nav-item > input {
+  color: white;
+}
+#dark nav .nav-item > input {
+  color: black;
+}
+nav .nav-item > input {
+  border: none;
+  height: 1.75rem;
+  background-color: #ffffff88 !important;
+}
+nav .nav-item > input:focus-visible,
+nav .nav-item > input:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+@media screen and (max-width: 992px) {
+  nav .navbar-nav > .nav-item {
+    margin: 0.25rem 0rem;
+  }
+}

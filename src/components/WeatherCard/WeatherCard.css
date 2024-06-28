@@ -1,0 +1,77 @@
+#dark .weather-card {
+  background-color: #222831;
+  box-shadow: 1px 5px 25px 3px #494949;
+}
+.weather-card {
+  background-color: #28688c;
+  box-shadow: 1px 5px 25px 3px #44444480;
+  border-radius: 10px;
+  margin: 100px auto;
+  max-width: 720px;
+  padding: 0px;
+  color: white;
+}
+.weather-card a {
+  color: white;
+  opacity: 0.6;
+  text-decoration: none;
+}
+.weather-card a:hover,
+.weather-card a:active,
+.weather-card a:focus {
+  color: white;
+  text-decoration: none;
+  opacity: 1;
+  cursor: pointer;
+}
+.weather-card .active {
+  color: white;
+  text-decoration: none;
+  opacity: 1;
+}
+.weather-card .weather-body-center {
+  display: flex;
+  align-items: flex-start;
+}
+.weather-card .weather-body-center > svg {
+  font-size: 6rem;
+}
+.weather-card .weather-body-center > p {
+  font-size: 1.5rem;
+}
+.weather-card .weather-body-right > h6 {
+  text-wrap: nowrap;
+  text-align: right;
+  margin-bottom: 0.25rem;
+}
+.weather-card #mainTemperature {
+  font-size: 5.5em;
+  line-height: 0.7;
+}
+.weather-card #tempDescription {
+  margin-top: 10px;
+  text-align: center;
+}
+.weather-card .side-weather-info {
+  padding: 0px 10px;
+}
+.weather-card .modal-body p {
+  color: #333;
+}
+@media screen and (max-width: 768px) {
+  .weather-card .weather-body-right {
+    display: flex;
+    justify-content: space-around;
+  }
+  .weather-card .weather-body-right > h6 {
+    display: inline;
+  }
+}
+@media screen and (max-width: 576px) {
+  .weather-card .weather-body-center {
+    justify-content: center;
+  }
+  .weather-card .weather-body-right > h6 {
+    font-size: small;
+  }
+}
