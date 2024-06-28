@@ -98,6 +98,9 @@ const WeatherCard = () => {
   }, []);
   useEffect(() => {
     fetchWeatherData();
+    const interval = setInterval(fetchWeatherData, 60000);
+
+    return () => clearInterval(interval);
   }, [location]);
 
   return (
@@ -113,7 +116,7 @@ const WeatherCard = () => {
               </h5>
               <h6>{unixtoDate(weatherData.data.list[0].dt)}</h6>
               <a className="fw-bold" onClick={() => getNowLocation()}>
-                <HiOutlineRefresh /> Refresh
+                <HiOutlineRefresh /> Reset
               </a>
             </div>
 
