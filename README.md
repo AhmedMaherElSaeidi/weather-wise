@@ -1,11 +1,11 @@
 # Weather Wise Forecast App
 
-This is a simple weather forecast application built with React and Vite. The app allows users to view the weather forecast for the next 4 days and choose between Celsius and Fahrenheit for temperature display. Users can also search for the weather in different cities around the world.
+This is a simple weather forecast application built with React and Vite. The app allows users to view the weather forecast for the next 3 or 4 days and choose between Celsius and Fahrenheit for temperature display. Users can also search for the weather in different cities around the world.
 
 ## Features
 
 - Mainly displays today's weather data
-- Display weather forecast for the next 4 days
+- Display weather forecast for the next 3 or 4 days
 - Toggle between Celsius and Fahrenheit
 - Search weather for different cities around the world
 - Dark theme support
