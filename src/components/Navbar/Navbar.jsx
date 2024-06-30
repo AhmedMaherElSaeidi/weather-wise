@@ -4,13 +4,14 @@ import ThemeBtn from "../ThemeBtn/ThemeBtn";
 import { FaBarsStaggered } from "react-icons/fa6";
 import React, { useEffect, useState } from "react";
 import navico from "../../assets/images/667d2c500bc3dcc782e652ef.png";
+import Spinner from "../Spinner/Spinner";
 
 const Navbar = () => {
   const [inputState, setInputState] = useState({ value: "", typing: false });
   const { setLocation } = globalContext();
   const handleInputState = (event) => {
     const { value } = event.target;
-    setInputState({ ...inputState, value, typing: true });
+    setInputState({ ...inputState, value, typing: value && true });
   };
 
   useEffect(() => {
@@ -56,6 +57,11 @@ const Navbar = () => {
                 aria-label="Search"
               />
             </li>
+            {inputState.typing && (
+              <li className="nav-item">
+                <Spinner />
+              </li>
+            )}
             <li className="nav-item">
               <ThemeBtn />
             </li>
