@@ -1,14 +1,17 @@
 import "./WeatherCard.css";
-import axios from "axios";
 import { globalContext } from "../../App";
 import React, { useEffect, useState } from "react";
-import WeatherForecast from "../../core/WeatherForecast";
+import ErrModal from "../ErrModal/ErrModal";
 import { HiOutlineRefresh } from "react-icons/hi";
 import WeatherIcon from "../WeatherIcon/WeatherIcon";
-import getCurrLocation from "../../core/GeoLocation";
 import WeatherSubCard from "../WeatherSubCard/WeatherSubCard";
-import ErrModal from "../ErrModal/ErrModal";
 import WeatherOffline from "../WeatherOffline/WeatherOffline";
+import {
+  fetchWeatherCity,
+  fetchWeatherCoords,
+} from "../../services/openweathermap";
+import getCurrLocation from "../../services/GeoLocation";
+import WeatherForecast from "../../models/WeatherForecast";
 
 const WeatherCard = () => {
   const [weatherMetric, setWeatherMetric] = useState("celsius");
@@ -19,45 +22,43 @@ const WeatherCard = () => {
     forecast: null,
   });
 
-  const fetchWeatherData = () => {
-    const API_KEY = "5a1b29dac74a692110d44806f4451917";
-    const api =
-      typeof location !== "string"
-        ? `https://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}&lat=${location.lat}&lon=${location.lon}&units=metric`
-        : `https://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}&q=${location}&units=metric`;
+  const fetchWeatherData = async () => {
+    try {
+      let weather_response = null;
 
-    axios
-      .get(api)
-      .then((response) => {
-        const weatherdata = response.data;
+      if (typeof location !== "string") {
+        weather_response = await fetchWeatherCoords(location.lat, location.lon);
+      } else {
+        weather_response = await fetchWeatherCity(location);
+      }
 
-        // Processing weather data to add to forecast
-        const weather = new WeatherForecast();
-        weatherdata.list.forEach((entry) => {
-          weather.addDayForecast(
-            entry.dt,
-            entry.dt_txt,
-            entry.weather[0].icon,
-            entry.main.temp,
-            entry.main.temp_min,
-            entry.main.temp_max
-          );
-        });
-
-        // Retrieve the entire forecast
-        const forecastData = weather.getForecast();
-        setWeatherData({
-          ...weatherData,
-          data: weatherdata,
-          forecast: forecastData,
-        });
-      })
-      .catch((error) => {
-        setWeatherData({
-          ...weatherData,
-          err: error.response ? error.response.data.message : error.message,
-        });
+      // Processing weather data to add to forecast
+      const weather = new WeatherForecast();
+      weather_response.data.list.forEach((entry) => {
+        weather.addDayForecast(
+          entry.dt,
+          entry.dt_txt,
+          entry.weather[0].icon,
+          entry.main.temp,
+          entry.main.temp_min,
+          entry.main.temp_max
+        );
       });
+
+      // Retrieve the entire forecast
+      const forecastData = weather.getForecast();
+      setWeatherData({
+        ...weatherData,
+        data: weather_response.data,
+        forecast: forecastData,
+      });
+    } catch (error) {
+      console.log(error);
+      setWeatherData({
+        ...weatherData,
+        err: error.response ? error.response.data.message : error.message,
+      });
+    }
   };
   const getNowLocation = async () => {
     try {
@@ -96,6 +97,7 @@ const WeatherCard = () => {
 
     fetchData();
   }, []);
+  
   useEffect(() => {
     fetchWeatherData();
     const interval = setInterval(fetchWeatherData, 60000);
@@ -105,7 +107,6 @@ const WeatherCard = () => {
 
   return (
     <div className="container weather-card p-1">
-      {!weatherData.data && <WeatherOffline />}
       {weatherData.data && (
         <div className="container-fluid p-3">
           <div className="row">
@@ -217,6 +218,7 @@ const WeatherCard = () => {
           closeModal={() => setWeatherData({ ...weatherData, err: null })}
         />
       )}
+      {!weatherData.data && <WeatherOffline />}
     </div>
   );
 };

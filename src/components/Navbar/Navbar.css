@@ -50,4 +50,8 @@ nav .nav-item > input:focus {
   nav .navbar-nav > .nav-item {
     margin: 0.25rem 0rem;
   }
+  nav .navbar-nav > .nav-item:not(:first-child) {
+    display: flex;
+    justify-content: center;
+  }
 }

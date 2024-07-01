@@ -3,7 +3,7 @@ class WeatherForecast {
     this.forecast = [];
   }
 
-  addDayForecast(dt, dateTxt, icon, temperature, minTemperature, maxTemperature) {
+  addDayForecast(dtUnix, dateTxt, icon, temperature, minTemperature, maxTemperature) {
     const date = dateTxt.split(" ")[0];
     const hours = new Date(dateTxt).getHours();
 
@@ -11,7 +11,7 @@ class WeatherForecast {
     let dayForecast = this.forecast.find((day) => day.date === date);
     if (!dayForecast) {
       dayForecast = {
-        dt: dt,
+        dt: dtUnix,
         date: date,
         temperatures: [],
         minTemperature: minTemperature,
